@@ -198,7 +198,7 @@ function renderDashboard() {
         const date   = new Date(deal.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         const multiple = deal.ebitda > 0
             ? `${(deal.askingPrice / deal.ebitda).toFixed(1)}x`
-            : '—';
+            : '';
 
         li.innerHTML = `
             <div class="activity-dot" style="background:${color};"></div>
@@ -217,7 +217,7 @@ function renderDashboard() {
 }
 
 // ----------------------------------------
-// Kanban Pipeline — 4 stages
+// Kanban Pipeline  4 stages
 // ----------------------------------------
 
 const STAGES = ['Researching', 'In Talks', 'Under Review', 'Closed'];
@@ -255,7 +255,7 @@ function renderKanban() {
 
             const multiple = deal.ebitda > 0
                 ? `${(deal.askingPrice / deal.ebitda).toFixed(1)}x`
-                : '—';
+                : '';
             const asking = deal.askingPrice > 0
                 ? `$${formatNum(deal.askingPrice)}`
                 : 'Price unknown';
@@ -334,7 +334,7 @@ function initDragAndDrop() {
 }
 
 // ----------------------------------------
-// Evaluator — 3-Business Comparison
+// Evaluator  3-Business Comparison
 // ----------------------------------------
 
 function calcBiz(prefix) {
@@ -371,19 +371,19 @@ function calcBiz(prefix) {
     if (margin !== null && margin >= 25) score += 2;
     else if (margin !== null && margin >= 15) score += 1;
 
-    let verdict = '—';
+    let verdict = '';
     let verdictClass = '';
     if (ebitda === 0 && asking === 0) {
         verdict = 'Enter data';
         verdictClass = 'verdict-neutral';
     } else if (dscr !== null && dscr >= 1.25 && multiple !== null && multiple <= 4.5) {
-        verdict = '✅ Strong';
+        verdict = ' Strong';
         verdictClass = 'verdict-good';
     } else if (dscr !== null && dscr >= 1.0) {
-        verdict = '⚠️ Proceed with Caution';
+        verdict = ' Proceed with Caution';
         verdictClass = 'verdict-warn';
     } else {
-        verdict = '🚨 Risky';
+        verdict = ' Risky';
         verdictClass = 'verdict-bad';
     }
 
@@ -411,11 +411,11 @@ function runComparison() {
     results.forEach(r => {
         const n = r.n;
 
-        setCell(`r${n}-multiple`, r.multiple !== null ? r.multiple.toFixed(2) + 'x' : '—', n, results, 'multiple', false);
-        setCell(`r${n}-margin`,   r.margin   !== null ? r.margin.toFixed(1) + '%' : '—',   n, results, 'margin',   true);
-        setCell(`r${n}-ds`,       r.annualDS  > 0     ? `-$${formatNum(r.annualDS)}` : '—', n, results, 'annualDS', false);
-        setCell(`r${n}-cashflow`, r.ebitda    > 0     ? `$${formatNum(r.cashflow)}`  : '—', n, results, 'cashflow', true);
-        setCell(`r${n}-dscr`,     r.dscr !== null && isFinite(r.dscr) ? r.dscr.toFixed(2) + 'x' : (r.dscr === Infinity ? '∞' : '—'), n, results, 'dscr', true);
+        setCell(`r${n}-multiple`, r.multiple !== null ? r.multiple.toFixed(2) + 'x' : '', n, results, 'multiple', false);
+        setCell(`r${n}-margin`,   r.margin   !== null ? r.margin.toFixed(1) + '%' : '',   n, results, 'margin',   true);
+        setCell(`r${n}-ds`,       r.annualDS  > 0     ? `-$${formatNum(r.annualDS)}` : '', n, results, 'annualDS', false);
+        setCell(`r${n}-cashflow`, r.ebitda    > 0     ? `$${formatNum(r.cashflow)}`  : '', n, results, 'cashflow', true);
+        setCell(`r${n}-dscr`,     r.dscr !== null && isFinite(r.dscr) ? r.dscr.toFixed(2) + 'x' : (r.dscr === Infinity ? '' : ''), n, results, 'dscr', true);
 
         const verdictCell = document.getElementById(`r${n}-verdict`);
         verdictCell.textContent = r.verdict;
@@ -433,14 +433,14 @@ function runComparison() {
         banner.style.display = 'block';
         banner.innerHTML = `
             <i class="fa-solid fa-trophy"></i>
-            <strong>${escapeHtml(winner.name)}</strong> looks like the best deal based on your inputs — highest take-home pay and healthiest loan safety ratio.
+            <strong>${escapeHtml(winner.name)}</strong> looks like the best deal based on your inputs  highest take-home pay and healthiest loan safety ratio.
         `;
     } else {
         banner.style.display = 'none';
     }
 }
 
-// Helper — highlights best/worst cell in a row
+// Helper  highlights best/worst cell in a row
 function setCell(id, displayVal, n, results, key, higherIsBetter) {
     const cell = document.getElementById(id);
     if (!cell) return;

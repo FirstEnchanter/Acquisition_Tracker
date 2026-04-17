@@ -1,10 +1,10 @@
-﻿# ðŸ“ˆ Deal Tracker â€” Business Acquisition Evaluator
+#  Deal Tracker  Business Acquisition Evaluator
 
 A specialized web application designed for entrepreneurs and investors to track, evaluate, and compare potential business acquisitions within the Autonomous Systems portfolio.
 
 ---
 
-## ðŸŒŸ Key Features
+##  Key Features
 
 - **Deal Pipeline (Kanban)**: Manage your acquisition funnel with a drag-and-drop interface across four stages: Researching, In Talks, Under Review, and Closed/Passed.
 - **Side-by-Side Evaluator**: Compare up to 3 businesses simultaneously. Input asking prices, revenue, and owner profit (SDE/EBITDA) to see:
@@ -20,7 +20,7 @@ A specialized web application designed for entrepreneurs and investors to track,
 
 ---
 
-## ðŸš€ How to Use
+##  How to Use
 
 ### Local Deployment
 Since the Acquisition Tracker is a client-side SPA, you can run it directly from your file system:
@@ -34,7 +34,7 @@ When comparing deals, use the **Evaluator** tab to plug in financials. Pay close
 
 ---
 
-## ðŸ“‚ Project Structure
+##  Project Structure
 
 - `index.html`: The core UI and layout using modern semantic HTML5.
 - `app.js`: Vanilla JavaScript logic handling state management, calculations, and local storage.
@@ -42,8 +42,7 @@ When comparing deals, use the **Evaluator** tab to plug in financials. Pay close
 
 ---
 
-## ðŸ› ï¸ Built With
+##  Built With
 - **Vanilla JavaScript**: Zero dependencies for maximum performance and privacy.
 - **FontAwesome**: For intuitive iconography.
 - **Inter Font**: For high-readability financial data.
-
