@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+                <span>Deal Tracker</span>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-view="pipeline">
+                    <i class="fa-solid fa-columns"></i> Deal Pipeline
+                </a>
+                <a href="#" class="nav-item" data-view="evaluator">
+                    <i class="fa-solid fa-scale-balanced"></i> Compare Deals
+                </a>
+                <a href="#" class="nav-item" data-view="data">
+                    <i class="fa-solid fa-floppy-disk"></i> Save / Export
+                </a>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="new-deal-btn" class="btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add New Business
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="view-section active">
+                <header class="section-header">
+                    <h1>Overview</h1>
+                    <p>A snapshot of all the businesses you are currently evaluating</p>
+                </header>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Businesses Tracked</h3>
+                            <div class="stat-value" id="stat-total">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+                        <div class="stat-info">
+                            <h3>In Active Review</h3>
+                            <div class="stat-value" id="stat-diligence">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #f472b6; background: rgba(244, 114, 182, 0.1);"><i class="fa-solid fa-xmark"></i></div>
+                        <div class="stat-info">
+                            <h3>Passed / Closed</h3>
+                            <div class="stat-value" id="stat-dead">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #fbbf24; background: rgba(251, 191, 36, 0.1);"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="stat-info">
+                            <h3>Avg Price-to-Profit Ratio</h3>
+                            <div class="stat-value" id="stat-multiple">0.0x</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-widgets">
+                    <div class="widget recent-activity">
+                        <h3>Recently Updated</h3>
+                        <ul class="activity-list" id="activity-list">
+                            <!-- Populated via JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pipeline View â€” 4 stages -->
+            <section id="view-pipeline" class="view-section">
+                <header class="section-header">
+                    <h1>Deal Pipeline</h1>
+                    <p>Drag and drop a business card to move it to the next stage</p>
+                </header>
+
+                <div class="kanban-board" id="kanban-board">
+
+                    <div class="kanban-column" data-stage="Researching">
+                        <div class="column-header stage-researching">
+                            <h3>
+                                <span class="stage-label"><i class="fa-solid fa-binoculars"></i> Researching</span>
+                                <span class="count">0</span>
+                            </h3>
+                            <p class="stage-desc">You found it â€” gathering basic info</p>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+
+                    <div class="kanban-column" data-stage="In Talks">
+                        <div class="column-header stage-talks">
+                            <h3>
+                                <span class="stage-label"><i class="fa-solid fa-comments"></i> In Talks</span>
+                                <span class="count">0</span>
+                            </h3>
+                            <p class="stage-desc">You've spoken with the seller / signed confidentiality agreement</p>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+
+                    <div class="kanban-column" data-stage="Under Review">
+                        <div class="column-header stage-review">
+                            <h3>
+                                <span class="stage-label"><i class="fa-solid fa-file-invoice-dollar"></i> Under Review</span>
+                                <span class="count">0</span>
+                            </h3>
+                            <p class="stage-desc">Reviewing financials / preparing or made an offer</p>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+
+                    <div class="kanban-column" data-stage="Closed">
+                        <div class="column-header stage-closed">
+                            <h3>
+                                <span class="stage-label"><i class="fa-solid fa-flag-checkered"></i> Closed / Passed</span>
+                                <span class="count">0</span>
+                            </h3>
+                            <p class="stage-desc">Deal is done or you've decided to move on</p>
+                        </div>
+                        <div class="kanban-cards"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Evaluator View â€” 3-way comparison -->
+            <section id="view-evaluator" class="view-section">
+                <header class="section-header">
+                    <h1>Compare Businesses</h1>
+                    <p>Enter details for up to 3 businesses side-by-side to see which puts the most money in your pocket</p>
+                </header>
+
+                <!-- Input Row -->
+                <div class="compare-inputs">
+                    <!-- Business 1 -->
+                    <div class="compare-input-card" id="biz-card-1">
+                        <div class="biz-card-header biz-1">
+                            <i class="fa-solid fa-building"></i>
+                            <input type="text" class="biz-name-input" id="biz1-name" value="Business 1" placeholder="Business Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Seller's Asking Price ($)
+                                <span class="help-icon" title="The total price the seller wants for the business.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b1-asking" value="1000000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Revenue ($)
+                                <span class="help-icon" title="The total money coming into the business each year before any expenses are paid.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b1-revenue" value="1500000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Owner Profit ($)
+                                <span class="help-icon" title="All the money the owner takes home each year â€” including salary, perks, and profit. Sometimes called SDE or EBITDA on financial statements.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b1-ebitda" value="350000">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Amount ($)
+                                <span class="help-icon" title="How much you plan to borrow. Typically 70â€“90% of the asking price, with the rest as your down payment.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b1-debt" value="800000">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Interest Rate (%)
+                                <span class="help-icon" title="The annual interest rate on your loan. SBA 7(a) loans are typically 8â€“12%.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b1-rate" value="9.0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Term (Years)
+                                <span class="help-icon" title="How many years you have to repay the loan. SBA loans are typically 10 years.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b1-term" value="10">
+                        </div>
+                    </div>
+
+                    <!-- Business 2 -->
+                    <div class="compare-input-card" id="biz-card-2">
+                        <div class="biz-card-header biz-2">
+                            <i class="fa-solid fa-building"></i>
+                            <input type="text" class="biz-name-input" id="biz2-name" value="Business 2" placeholder="Business Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Seller's Asking Price ($)
+                                <span class="help-icon" title="The total price the seller wants for the business.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b2-asking" value="800000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Revenue ($)
+                                <span class="help-icon" title="The total money coming into the business each year before any expenses are paid.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b2-revenue" value="1200000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Owner Profit ($)
+                                <span class="help-icon" title="All the money the owner takes home each year â€” including salary, perks, and profit. Sometimes called SDE or EBITDA on financial statements.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b2-ebitda" value="280000">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Amount ($)
+                                <span class="help-icon" title="How much you plan to borrow. Typically 70â€“90% of the asking price, with the rest as your down payment.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b2-debt" value="640000">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Interest Rate (%)
+                                <span class="help-icon" title="The annual interest rate on your loan. SBA 7(a) loans are typically 8â€“12%.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b2-rate" value="9.0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Term (Years)
+                                <span class="help-icon" title="How many years you have to repay the loan. SBA loans are typically 10 years.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b2-term" value="10">
+                        </div>
+                    </div>
+
+                    <!-- Business 3 -->
+                    <div class="compare-input-card" id="biz-card-3">
+                        <div class="biz-card-header biz-3">
+                            <i class="fa-solid fa-building"></i>
+                            <input type="text" class="biz-name-input" id="biz3-name" value="Business 3" placeholder="Business Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Seller's Asking Price ($)
+                                <span class="help-icon" title="The total price the seller wants for the business.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b3-asking" value="1500000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Revenue ($)
+                                <span class="help-icon" title="The total money coming into the business each year before any expenses are paid.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b3-revenue" value="2200000">
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Owner Profit ($)
+                                <span class="help-icon" title="All the money the owner takes home each year â€” including salary, perks, and profit. Sometimes called SDE or EBITDA on financial statements.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b3-ebitda" value="420000">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Amount ($)
+                                <span class="help-icon" title="How much you plan to borrow. Typically 70â€“90% of the asking price, with the rest as your down payment.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b3-debt" value="1200000">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Interest Rate (%)
+                                <span class="help-icon" title="The annual interest rate on your loan. SBA 7(a) loans are typically 8â€“12%.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b3-rate" value="9.0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Term (Years)
+                                <span class="help-icon" title="How many years you have to repay the loan. SBA loans are typically 10 years.">?</span>
+                            </label>
+                            <input type="number" class="biz-input" id="b3-term" value="10">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Results Table -->
+                <div class="compare-results-card">
+                    <h3><i class="fa-solid fa-table"></i> Side-by-Side Results</h3>
+                    <div class="compare-table-wrap">
+                        <table class="compare-table" id="compare-table">
+                            <thead>
+                                <tr>
+                                    <th class="metric-label-col">Metric</th>
+                                    <th id="th-biz1">Business 1</th>
+                                    <th id="th-biz2">Business 2</th>
+                                    <th id="th-biz3">Business 3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="metric-label">Price-to-Profit Ratio <span class="metric-hint">Lower = better deal</span></td>
+                                    <td id="r1-multiple">â€”</td>
+                                    <td id="r2-multiple">â€”</td>
+                                    <td id="r3-multiple">â€”</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-label">Profit Margin <span class="metric-hint">% of revenue kept as profit</span></td>
+                                    <td id="r1-margin">â€”</td>
+                                    <td id="r2-margin">â€”</td>
+                                    <td id="r3-margin">â€”</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-label">Annual Loan Payment <span class="metric-hint">What you'll pay the bank each year</span></td>
+                                    <td id="r1-ds">â€”</td>
+                                    <td id="r2-ds">â€”</td>
+                                    <td id="r3-ds">â€”</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td class="metric-label">Your Annual Take-Home Pay <span class="metric-hint">Profit left after paying the loan</span></td>
+                                    <td id="r1-cashflow">â€”</td>
+                                    <td id="r2-cashflow">â€”</td>
+                                    <td id="r3-cashflow">â€”</td>
+                                </tr>
+                                <tr>
+                                    <td class="metric-label">Loan Safety Ratio <span class="metric-hint">&ge;1.25x = safe. Below 1.0x = risky</span></td>
+                                    <td id="r1-dscr">â€”</td>
+                                    <td id="r2-dscr">â€”</td>
+                                    <td id="r3-dscr">â€”</td>
+                                </tr>
+                                <tr class="verdict-row">
+                                    <td class="metric-label">Overall Verdict</td>
+                                    <td id="r1-verdict">â€”</td>
+                                    <td id="r2-verdict">â€”</td>
+                                    <td id="r3-verdict">â€”</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="winner-banner" id="winner-banner" style="display:none;"></div>
+                </div>
+            </section>
+
+            <!-- Data Management View -->
+            <section id="view-data" class="view-section">
+                <header class="section-header">
+                    <h1>Save &amp; Export</h1>
+                    <p>Back up your data or export it to Excel / Google Sheets</p>
+                </header>
+
+                <div class="data-actions">
+                    <div class="data-card">
+                        <div class="data-card-icon" style="color: #10b981; background: rgba(16,185,129,0.1);"><i class="fa-solid fa-file-excel"></i></div>
+                        <h3>Export to Excel / Google Sheets</h3>
+                        <p>Download your full pipeline as a <strong>.csv</strong> file. Open directly in Microsoft Excel, or import into Google Sheets in seconds.</p>
+                        <button id="btn-export-csv" class="btn-primary">
+                            <i class="fa-solid fa-download"></i> Download Spreadsheet
+                        </button>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-icon" style="color: #6366f1; background: rgba(99,102,241,0.1);"><i class="fa-solid fa-box-archive"></i></div>
+                        <h3>Full Backup (JSON)</h3>
+                        <p>Download a complete backup file that can be re-imported here later. Use this to never lose your data.</p>
+                        <button id="btn-export" class="btn-secondary" style="width:100%">
+                            <i class="fa-solid fa-download"></i> Download Backup
+                        </button>
+                    </div>
+
+                    <div class="data-card">
+                        <div class="data-card-icon" style="color: #0ea5e9; background: rgba(14,165,233,0.1);"><i class="fa-solid fa-upload"></i></div>
+                        <h3>Restore from Backup</h3>
+                        <p>Upload a previously downloaded backup file to restore your pipeline.</p>
+                        <input type="file" id="file-import" accept=".json" style="display:none;">
+                        <button id="btn-import" class="btn-secondary" style="width:100%">
+                            <i class="fa-solid fa-folder-open"></i> Select Backup File
+                        </button>
+                    </div>
+
+                    <div class="data-card danger-zone">
+                        <div class="data-card-icon" style="color: #ef4444; background: rgba(239,68,68,0.1);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <h3>Clear All Data</h3>
+                        <p>Permanently delete everything stored on this computer. Make sure you have a backup first!</p>
+                        <button id="btn-clear-data" class="btn-danger" style="width:100%">Delete Everything</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal for New/Edit Deal -->
+    <div class="modal-overlay" id="deal-modal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2 id="modal-title">Add New Business</h2>
+                <button class="close-modal" id="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </header>
+            <div class="modal-body">
+                <form id="deal-form">
+                    <input type="hidden" id="deal-id">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Business Name <span class="required">*</span></label>
+                            <input type="text" id="deal-name" placeholder="e.g. Apex HVAC Solutions" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Type of Business</label>
+                            <input type="text" id="deal-industry" placeholder="e.g. Plumbing, Auto Repair, Staffing">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City, State</label>
+                            <input type="text" id="deal-location" placeholder="e.g. Charlotte, NC">
+                        </div>
+                        <div class="form-group">
+                            <label>How did you find this business?</label>
+                            <select id="deal-source">
+                                <option value="Business Broker">Business Broker (they reached out to me)</option>
+                                <option value="Cold Outreach">Cold Outreach (I contacted them directly)</option>
+                                <option value="Friend / Referral">Friend or Referral</option>
+                                <option value="Online Listing">Online Listing (BizBuySell, etc.)</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Seller's Asking Price ($)
+                                <span class="help-icon" title="The price the seller is listing the business for.">?</span>
+                            </label>
+                            <input type="number" id="deal-asking" value="0" min="0">
+                            <small class="field-help">Leave as 0 if not yet known</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Annual Owner Profit ($)
+                                <span class="help-icon" title="The total yearly earnings the owner takes home â€” salary, perks, and profit combined. You'll see this called SDE or EBITDA on financial documents.">?</span>
+                            </label>
+                            <input type="number" id="deal-ebitda" value="0" min="0">
+                            <small class="field-help">Also called SDE or EBITDA. Leave as 0 if unknown.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Where is this deal right now?</label>
+                        <select id="deal-stage">
+                            <option value="Researching">Researching â€” I found it and I'm learning more</option>
+                            <option value="In Talks">In Talks â€” I've spoken with the seller</option>
+                            <option value="Under Review">Under Review â€” I'm looking at financials / made an offer</option>
+                            <option value="Closed">Closed / Passed â€” Done or moved on</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Notes &amp; Next Steps</label>
+                        <textarea id="deal-notes" rows="3" placeholder="e.g. Call back Thursday. Owner wants to retire in 6 months. Revenue looks stable."></textarea>
+                    </div>
+                </form>
+            </div>
+            <footer class="modal-footer">
+                <button type="button" class="btn-secondary" id="btn-cancel-modal">Cancel</button>
+                <button type="button" class="btn-primary" id="btn-save-deal">Save Business</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
