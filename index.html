@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deal Tracker</title>
+    <title>Skyarkie DealTracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/logo-emblem-olive.svg">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -14,7 +15,9 @@
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
-                <span>Deal Tracker</span>
+            <div class="logo">
+                <img src="assets/logo-lockup-cream.svg" alt="Skyarkie Holdings DealTracker">
+            </div>
             
             <div class="nav-links">
                 <a href="#" class="nav-item active" data-view="dashboard">
@@ -50,28 +53,28 @@
                 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+                        <div class="stat-icon stat-icon-accent"><i class="fa-solid fa-building"></i></div>
                         <div class="stat-info">
                             <h3>Total Businesses Tracked</h3>
                             <div class="stat-value" id="stat-total">0</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="color: #4ade80; background: rgba(74, 222, 128, 0.1);"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+                        <div class="stat-icon stat-icon-accent"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
                         <div class="stat-info">
                             <h3>In Active Review</h3>
                             <div class="stat-value" id="stat-diligence">0</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="color: #f472b6; background: rgba(244, 114, 182, 0.1);"><i class="fa-solid fa-xmark"></i></div>
+                        <div class="stat-icon stat-icon-accent"><i class="fa-solid fa-xmark"></i></div>
                         <div class="stat-info">
                             <h3>Passed / Closed</h3>
                             <div class="stat-value" id="stat-dead">0</div>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="color: #fbbf24; background: rgba(251, 191, 36, 0.1);"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="stat-icon stat-icon-accent"><i class="fa-solid fa-sack-dollar"></i></div>
                         <div class="stat-info">
                             <h3>Avg Price-to-Profit Ratio</h3>
                             <div class="stat-value" id="stat-multiple">0.0x</div>
@@ -383,7 +386,7 @@
 
                 <div class="data-actions">
                     <div class="data-card">
-                        <div class="data-card-icon" style="color: #10b981; background: rgba(16,185,129,0.1);"><i class="fa-solid fa-file-excel"></i></div>
+                        <div class="data-card-icon data-card-icon-accent"><i class="fa-solid fa-file-excel"></i></div>
                         <h3>Export to Excel / Google Sheets</h3>
                         <p>Download your full pipeline as a <strong>.csv</strong> file. Open directly in Microsoft Excel, or import into Google Sheets in seconds.</p>
                         <button id="btn-export-csv" class="btn-primary">
@@ -392,7 +395,7 @@
                     </div>
 
                     <div class="data-card">
-                        <div class="data-card-icon" style="color: #6366f1; background: rgba(99,102,241,0.1);"><i class="fa-solid fa-box-archive"></i></div>
+                        <div class="data-card-icon data-card-icon-soft"><i class="fa-solid fa-box-archive"></i></div>
                         <h3>Full Backup (JSON)</h3>
                         <p>Download a complete backup file that can be re-imported here later. Use this to never lose your data.</p>
                         <button id="btn-export" class="btn-secondary" style="width:100%">
@@ -401,7 +404,7 @@
                     </div>
 
                     <div class="data-card">
-                        <div class="data-card-icon" style="color: #0ea5e9; background: rgba(14,165,233,0.1);"><i class="fa-solid fa-upload"></i></div>
+                        <div class="data-card-icon data-card-icon-soft"><i class="fa-solid fa-upload"></i></div>
                         <h3>Restore from Backup</h3>
                         <p>Upload a previously downloaded backup file to restore your pipeline.</p>
                         <input type="file" id="file-import" accept=".json" style="display:none;">
@@ -411,7 +414,7 @@
                     </div>
 
                     <div class="data-card danger-zone">
-                        <div class="data-card-icon" style="color: #ef4444; background: rgba(239,68,68,0.1);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="data-card-icon data-card-icon-danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
                         <h3>Clear All Data</h3>
                         <p>Permanently delete everything stored on this computer. Make sure you have a backup first!</p>
                         <button id="btn-clear-data" class="btn-danger" style="width:100%">Delete Everything</button>
