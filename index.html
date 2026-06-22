@@ -24,7 +24,7 @@
                     <i class="fa-solid fa-columns"></i> Deal Pipeline
                 </a>
                 <a href="#" class="nav-item" data-view="evaluator">
-                    <i class="fa-solid fa-scale-balanced"></i> Compare Deals
+                    <i class="fa-solid fa-scale-balanced"></i> Compare &amp; Decide
                 </a>
                 <a href="#" class="nav-item" data-view="data">
                     <i class="fa-solid fa-floppy-disk"></i> Save / Export
@@ -45,7 +45,7 @@
             <section id="view-dashboard" class="view-section active">
                 <header class="section-header">
                     <h1>Overview</h1>
-                    <p>A snapshot of all the businesses you are currently evaluating</p>
+                    <p>A quick snapshot of the businesses you are comparing and the next move to make</p>
                 </header>
                 
                 <div class="stats-grid">
@@ -93,7 +93,7 @@
             <section id="view-pipeline" class="view-section">
                 <header class="section-header">
                     <h1>Deal Pipeline</h1>
-                    <p>Drag and drop a business card to move it to the next stage</p>
+                    <p>Use the pipeline for lightweight tracking while you compare and decide</p>
                 </header>
 
                 <div class="kanban-board" id="kanban-board">
@@ -147,8 +147,8 @@
             <!-- Evaluator View  3-way comparison -->
             <section id="view-evaluator" class="view-section">
                 <header class="section-header">
-                    <h1>Compare Businesses</h1>
-                    <p>Enter details for up to 3 businesses side-by-side to see which puts the most money in your pocket</p>
+                    <h1>Compare and Decide</h1>
+                    <p>Choose saved businesses from the pipeline or use Custom to enter your own data, then compare side by side</p>
                 </header>
 
                 <!-- Input Row -->
@@ -159,41 +159,47 @@
                             <i class="fa-solid fa-building"></i>
                             <input type="text" class="biz-name-input" id="biz1-name" value="Business 1" placeholder="Business Name">
                         </div>
+                        <div class="form-group compare-source-group">
+                            <label>Comparison Source</label>
+                            <select class="compare-source" id="compare-source-1">
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>Seller's Asking Price ($)
                                 <span class="help-icon" title="The total price the seller wants for the business.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b1-asking" value="1000000">
+                            <input type="number" class="biz-input" id="b1-asking" value="0">
                         </div>
                         <div class="form-group">
                             <label>Annual Revenue ($)
                                 <span class="help-icon" title="The total money coming into the business each year before any expenses are paid.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b1-revenue" value="1500000">
+                            <input type="number" class="biz-input" id="b1-revenue" value="0">
                         </div>
                         <div class="form-group">
                             <label>Annual Owner Profit ($)
                                 <span class="help-icon" title="All the money the owner takes home each year  including salary, perks, and profit. Sometimes called SDE or EBITDA on financial statements.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b1-ebitda" value="350000">
+                            <input type="number" class="biz-input" id="b1-ebitda" value="0">
                         </div>
                         <div class="form-group">
                             <label>Loan Amount ($)
                                 <span class="help-icon" title="How much you plan to borrow. Typically 7090% of the asking price, with the rest as your down payment.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b1-debt" value="800000">
+                            <input type="number" class="biz-input" id="b1-debt" value="0">
                         </div>
                         <div class="form-group">
                             <label>Loan Interest Rate (%)
                                 <span class="help-icon" title="The annual interest rate on your loan. SBA 7(a) loans are typically 812%.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b1-rate" value="9.0" step="0.1">
+                            <input type="number" class="biz-input" id="b1-rate" value="0" min="0" step="0.1">
                         </div>
                         <div class="form-group">
                             <label>Loan Term (Years)
                                 <span class="help-icon" title="How many years you have to repay the loan. SBA loans are typically 10 years.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b1-term" value="10">
+                            <input type="number" class="biz-input" id="b1-term" value="0" min="0" step="1">
                         </div>
                     </div>
 
@@ -203,41 +209,47 @@
                             <i class="fa-solid fa-building"></i>
                             <input type="text" class="biz-name-input" id="biz2-name" value="Business 2" placeholder="Business Name">
                         </div>
+                        <div class="form-group compare-source-group">
+                            <label>Comparison Source</label>
+                            <select class="compare-source" id="compare-source-2">
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>Seller's Asking Price ($)
                                 <span class="help-icon" title="The total price the seller wants for the business.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b2-asking" value="800000">
+                            <input type="number" class="biz-input" id="b2-asking" value="0">
                         </div>
                         <div class="form-group">
                             <label>Annual Revenue ($)
                                 <span class="help-icon" title="The total money coming into the business each year before any expenses are paid.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b2-revenue" value="1200000">
+                            <input type="number" class="biz-input" id="b2-revenue" value="0">
                         </div>
                         <div class="form-group">
                             <label>Annual Owner Profit ($)
                                 <span class="help-icon" title="All the money the owner takes home each year  including salary, perks, and profit. Sometimes called SDE or EBITDA on financial statements.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b2-ebitda" value="280000">
+                            <input type="number" class="biz-input" id="b2-ebitda" value="0">
                         </div>
                         <div class="form-group">
                             <label>Loan Amount ($)
                                 <span class="help-icon" title="How much you plan to borrow. Typically 7090% of the asking price, with the rest as your down payment.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b2-debt" value="640000">
+                            <input type="number" class="biz-input" id="b2-debt" value="0">
                         </div>
                         <div class="form-group">
                             <label>Loan Interest Rate (%)
                                 <span class="help-icon" title="The annual interest rate on your loan. SBA 7(a) loans are typically 812%.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b2-rate" value="9.0" step="0.1">
+                            <input type="number" class="biz-input" id="b2-rate" value="0" min="0" step="0.1">
                         </div>
                         <div class="form-group">
                             <label>Loan Term (Years)
                                 <span class="help-icon" title="How many years you have to repay the loan. SBA loans are typically 10 years.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b2-term" value="10">
+                            <input type="number" class="biz-input" id="b2-term" value="0" min="0" step="1">
                         </div>
                     </div>
 
@@ -247,47 +259,53 @@
                             <i class="fa-solid fa-building"></i>
                             <input type="text" class="biz-name-input" id="biz3-name" value="Business 3" placeholder="Business Name">
                         </div>
+                        <div class="form-group compare-source-group">
+                            <label>Comparison Source</label>
+                            <select class="compare-source" id="compare-source-3">
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>Seller's Asking Price ($)
                                 <span class="help-icon" title="The total price the seller wants for the business.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b3-asking" value="1500000">
+                            <input type="number" class="biz-input" id="b3-asking" value="0">
                         </div>
                         <div class="form-group">
                             <label>Annual Revenue ($)
                                 <span class="help-icon" title="The total money coming into the business each year before any expenses are paid.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b3-revenue" value="2200000">
+                            <input type="number" class="biz-input" id="b3-revenue" value="0">
                         </div>
                         <div class="form-group">
                             <label>Annual Owner Profit ($)
                                 <span class="help-icon" title="All the money the owner takes home each year  including salary, perks, and profit. Sometimes called SDE or EBITDA on financial statements.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b3-ebitda" value="420000">
+                            <input type="number" class="biz-input" id="b3-ebitda" value="0">
                         </div>
                         <div class="form-group">
                             <label>Loan Amount ($)
                                 <span class="help-icon" title="How much you plan to borrow. Typically 7090% of the asking price, with the rest as your down payment.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b3-debt" value="1200000">
+                            <input type="number" class="biz-input" id="b3-debt" value="0">
                         </div>
                         <div class="form-group">
                             <label>Loan Interest Rate (%)
                                 <span class="help-icon" title="The annual interest rate on your loan. SBA 7(a) loans are typically 812%.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b3-rate" value="9.0" step="0.1">
+                            <input type="number" class="biz-input" id="b3-rate" value="0" min="0" step="0.1">
                         </div>
                         <div class="form-group">
                             <label>Loan Term (Years)
                                 <span class="help-icon" title="How many years you have to repay the loan. SBA loans are typically 10 years.">?</span>
                             </label>
-                            <input type="number" class="biz-input" id="b3-term" value="10">
+                            <input type="number" class="biz-input" id="b3-term" value="0" min="0" step="1">
                         </div>
                     </div>
                 </div>
 
                 <!-- Comparison Results Table -->
-                <div class="compare-results-card">
+                    <div class="compare-results-card">
                     <h3><i class="fa-solid fa-table"></i> Side-by-Side Results</h3>
                     <div class="compare-table-wrap">
                         <table class="compare-table" id="compare-table">
@@ -340,6 +358,19 @@
                         </table>
                     </div>
                     <div class="winner-banner" id="winner-banner" style="display:none;"></div>
+                    <div class="next-steps-card" id="next-steps-card">
+                        <h3><i class="fa-solid fa-compass"></i> Actionable Next Steps</h3>
+                        <p class="next-steps-summary" id="next-steps-summary">Enter at least one deal to see a recommended next move.</p>
+                        <ul class="next-steps-list" id="next-steps-list">
+                            <li>Compare the asking price, profit, and loan safety side by side.</li>
+                            <li>Keep only the lightweight operational details you need to stay organized.</li>
+                            <li>Use the recommendation here to decide what to do next.</li>
+                        </ul>
+                        <div class="next-steps-footer">
+                            <span>Best current move</span>
+                            <strong id="next-step-action">Add a few deals to compare.</strong>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -444,6 +475,30 @@
                             </label>
                             <input type="number" id="deal-ebitda" value="0" min="0">
                             <small class="field-help">Also called SDE or EBITDA. Leave as 0 if unknown.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Annual Revenue ($)</label>
+                            <input type="number" id="deal-revenue" value="0" min="0">
+                            <small class="field-help">Needed for margin and comparison context.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Amount ($)</label>
+                            <input type="number" id="deal-debt" value="0" min="0">
+                            <small class="field-help">Needed for loan payment and DSCR.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Loan Interest Rate (%)</label>
+                            <input type="number" id="deal-rate" value="0" min="0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Term (Years)</label>
+                            <input type="number" id="deal-term" value="0" min="0" step="1">
                         </div>
                     </div>
 

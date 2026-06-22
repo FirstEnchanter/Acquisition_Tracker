@@ -533,6 +533,12 @@ button { font-family: inherit; cursor: pointer; border: none; outline: none; }
 
 .compare-input-card .form-group { padding: 0 20px; }
 .compare-input-card .form-group:last-child { padding-bottom: 18px; }
+.compare-source-group { margin-bottom: 14px; }
+.compare-source-group label {
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-size: 11px;
+}
 
 /* Results Table */
 .compare-results-card {
@@ -631,6 +637,70 @@ button { font-family: inherit; cursor: pointer; border: none; outline: none; }
     line-height: 1.5;
 }
 .winner-banner i { font-size: 22px; color: #fbbf24; flex-shrink: 0; }
+
+/* Next Steps Guidance */
+.next-steps-card {
+    margin-top: 20px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(14,165,233,0.05));
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: var(--radius-lg);
+}
+.next-steps-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.next-steps-summary {
+    color: #dbeafe;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+.next-steps-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+.next-steps-list li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--text-main);
+    font-size: 13px;
+    line-height: 1.5;
+}
+.next-steps-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-secondary);
+}
+.next-steps-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-muted);
+    font-size: 12px;
+}
+.next-steps-footer strong {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+}
 
 /* ===================== DATA MANAGEMENT ===================== */
 .data-actions {
