@@ -27,6 +27,12 @@ Since the Acquisition Tracker is a client-side SPA, you can run it directly from
 1. Open `index.html` in any modern web browser.
 2. Start adding businesses using the "Add New Business" button.
 
+### Cloudflare Deployment
+This repo is set up for Cloudflare Workers static assets deployment:
+1. Connect the GitHub repo to Cloudflare Workers.
+2. Use the repo root as the asset directory.
+3. Deploy the app and assign a custom subdomain such as `tracker.yourdomain.com`.
+
 ### Evaluation Criteria
 When comparing deals, use the **Evaluator** tab to plug in financials. Pay close attention to:
 - **Take-Home Pay**: This is your actual income after the bank gets paid.
