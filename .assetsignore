@@ -1,6 +1,8 @@
 README.md
 wrangler.jsonc
 .gitignore
+.git/
+.wrangler/
 run_agent.bat
 run_agent_hidden.vbs
 brand-preview.html
